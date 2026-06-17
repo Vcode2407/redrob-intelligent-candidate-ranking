@@ -1,0 +1,43 @@
+# Python caches
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+
+# Local environments and secrets
+.venv/
+venv/
+.env
+.env.*
+
+# OS/editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Challenge input data and large local artifacts
+data/candidates.jsonl
+data/candidates.jsonl.gz
+data/*.jsonl
+data/*.jsonl.gz
+*.tmp
+*.temp
+*.log
+*.zip
+*.tar
+*.tar.gz
+*.7z
+
+# Generated output/debug artifacts
+outputs/
+
+# Internal review artifacts
+FINAL_AUDIT_REPORT.md
+
+# Local exploration
+notebooks/
+.ipynb_checkpoints/

@@ -1,0 +1,47 @@
+team_name: "your-team-name-here"
+
+primary_contact:
+  name: "Full Name"
+  email: "primary@example.com"
+  phone: "+91-XXXXXXXXXX"
+
+team_members:
+  - name: "Member 1 Full Name"
+    email: "member1@example.com"
+    role: "AI Engineer"
+
+github_repo: "https://github.com/Vcode2407/redrob-intelligent-candidate-ranking"
+sandbox_link: "https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker"
+reproduce_command: "python run.py --candidates ./data/candidates.jsonl --out ./submission.csv"
+
+compute:
+  platform: "Local CPU - 11th Gen Intel(R) Core(TM) i7-1185G7 @ 3.00GHz"
+  cpu_cores: 8
+  ram_gb: 15
+  python_version: "3.12.10"
+  os: "Microsoft Windows 11 Pro"
+  uses_gpu_for_inference: false
+  has_network_during_ranking: false
+  pre_computation_required: false
+  pre_computation_time_minutes: 0
+
+ai_tools_used:
+  - "ChatGPT"
+
+ai_usage_summary: |
+  Used AI assistance to analyze challenge documents, design the ranking rubric,
+  and implement/review code. No external AI APIs are used during ranking.
+
+methodology_summary: |
+  Deterministic CPU-only ranker using field-aware evidence scoring. Career-history
+  production retrieval/ranking evidence dominates skill-list keywords. The model
+  combines technical match, experience relevance, career quality, behavioral
+  availability, and explicit risk penalties for keyword stuffing, consulting-only
+  profiles, pure research without production, and honeypot patterns.
+
+declarations:
+  read_submission_spec: true
+  code_is_original_work: true
+  no_collusion: true
+  honeypot_check_done: true
+  reproduction_tested: true
