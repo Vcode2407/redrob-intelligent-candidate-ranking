@@ -1,13 +1,13 @@
-team_name: "your-team-name-here"
+team_name: "Vkodes"
 
 primary_contact:
-  name: "Full Name"
-  email: "primary@example.com"
-  phone: "+91-XXXXXXXXXX"
+  name: "Vinay Kumar"
+  email: "vkslog69@gmail.com"
+  phone: "8309976969"
 
 team_members:
-  - name: "Member 1 Full Name"
-    email: "member1@example.com"
+  - name: "Vinay Kumar"
+    email: "vkslog69@gmail.com"
     role: "AI Engineer"
 
 github_repo: "https://github.com/Vcode2407/redrob-intelligent-candidate-ranking"
