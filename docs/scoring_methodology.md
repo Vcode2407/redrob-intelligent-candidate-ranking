@@ -2,7 +2,7 @@
 
 ## Objective
 
-Rank the top 100 candidates for a Senior AI Engineer role at Redrob, optimizing for hidden relevance metrics that heavily reward the top 10 and top 50 while filtering honeypots.
+Rank the top 100 candidates for Redrob's Senior AI Engineer role. The scoring is designed around the official metric emphasis on the first 10 and first 50 ranks, while avoiding profiles that look relevant only because of keyword stuffing or inconsistent data.
 
 ## Formula
 
@@ -32,7 +32,7 @@ Skill subscore uses proficiency, duration, endorsements, and assessment score. I
 
 ## B. Experience Relevance
 
-Experience favors the JD's ideal 5-9 year band but allows exceptional candidates outside the band.
+Experience favors the JD's ideal 5-9 year band but does not automatically remove candidates outside that range.
 
 Components:
 
@@ -42,7 +42,7 @@ Components:
 
 ## C. Career Quality
 
-Career quality captures whether the candidate looks like someone who can thrive in Redrob's founding AI team.
+Career quality captures whether the candidate's recent work is close to Redrob's AI product needs.
 
 Positive:
 
@@ -76,7 +76,7 @@ The scorer does not let behavior rescue an irrelevant profile, but it can reorde
 
 ## E. Risk Detection
 
-Risk penalties detect traps and low-quality profiles:
+Risk penalties detect trap patterns and weak profile evidence:
 
 - keyword stuffing: many AI skills with weak production history.
 - self-learner AI language as the primary evidence.
@@ -90,13 +90,13 @@ Risk penalties detect traps and low-quality profiles:
 - repeated role-description templates.
 - experience far above the JD's senior-but-hands-on target band.
 
-Hard honeypot penalties are large enough to push candidates out of the top 100 even if their text contains many JD terms.
+Large risk penalties are used when a profile has clear honeypot patterns, so repeated JD terms alone do not keep the profile near the top.
 
 ## Why These Weights
 
-The official composite is `0.50 * NDCG@10 + 0.30 * NDCG@50 + 0.15 * MAP + 0.05 * P@10`. That means top-rank precision matters far more than broad recall. The weighting therefore:
+The official composite is `0.50 * NDCG@10 + 0.30 * NDCG@50 + 0.15 * MAP + 0.05 * P@10`. Because most of the score comes from the first 10 and first 50 ranks, the weighting:
 
 - makes production technical evidence the largest term.
 - uses behavior as a tie-break/modifier, not the main signal.
-- penalizes traps aggressively to protect top-100 honeypot rate.
+- uses explicit risk penalties for traps and inconsistent profiles.
 - avoids overfitting to skills because the challenge explicitly contains keyword-stuffers.

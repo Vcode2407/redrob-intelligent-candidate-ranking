@@ -33,11 +33,13 @@ ai_usage_summary: |
   and implement/review code. No external AI APIs are used during ranking.
 
 methodology_summary: |
-  Deterministic CPU-only ranker using field-aware evidence scoring. Career-history
-  production retrieval/ranking evidence dominates skill-list keywords. The model
-  combines technical match, experience relevance, career quality, behavioral
-  availability, and explicit risk penalties for keyword stuffing, consulting-only
-  profiles, pure research without production, and honeypot patterns.
+  Deterministic CPU-only ranker that scores each candidate from structured profile
+  fields. Career-history evidence for retrieval, search, ranking, evaluation, and
+  deployment is weighted more heavily than skill-list keywords. Behavioral signals
+  such as response rate, recent activity, notice period, and relocation are used as
+  hireability modifiers. Risk penalties cover keyword stuffing, consulting-only
+  histories, research without production deployment, repeated descriptions, and
+  inconsistent profile patterns.
 
 declarations:
   read_submission_spec: true

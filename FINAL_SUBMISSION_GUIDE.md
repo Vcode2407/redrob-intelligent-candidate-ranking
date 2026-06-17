@@ -1,65 +1,43 @@
 # Final Submission Guide
 
-## Placeholder Metadata Table
+This guide covers the manual portal steps after the GitHub repository and `submission.csv` have been prepared.
 
-| Field | Required Value | Status |
+## Metadata Check
+
+| Field | Current Value | Status |
 |---|---|---|
-| `team_name` | Final registered team name | Missing human input |
-| `primary_contact.name` | Primary contact full name | Missing human input |
-| `primary_contact.email` | Primary contact email | Missing human input |
-| `primary_contact.phone` | Primary contact phone number | Missing human input |
-| `team_members[0].name` | Team member full name | Missing human input |
-| `team_members[0].email` | Team member email | Missing human input |
-| `github_repo` | Public or organizer-accessible GitHub repository URL | Missing human input |
-| `sandbox_link` | Working hosted sandbox or demo URL | Missing human input |
-| `compute.platform` | Final machine/platform used for submitted run | Review and confirm |
-| `compute.cpu_cores` | Final CPU core count | Review and confirm |
-| `compute.ram_gb` | Final RAM in GB | Review and confirm |
-| `compute.python_version` | Exact Python version from final environment | Review and confirm |
-| `compute.os` | Exact OS from final environment | Review and confirm |
+| `team_name` | `Vkodes` | Filled |
+| `primary_contact.name` | `Vinay Kumar` | Filled |
+| `primary_contact.email` | `vkslog69@gmail.com` | Filled |
+| `primary_contact.phone` | `8309976969` | Filled |
+| `team_members[0].name` | `Vinay Kumar` | Filled |
+| `team_members[0].email` | `vkslog69@gmail.com` | Filled |
+| `github_repo` | `https://github.com/Vcode2407/redrob-intelligent-candidate-ranking` | Filled |
+| `sandbox_link` | Placeholder Hugging Face URL | Leave unchanged unless a demo is created |
+| `compute.platform` | Local Intel i7 CPU | Filled |
+| `compute.cpu_cores` | `8` logical cores | Filled |
+| `compute.ram_gb` | `15` | Filled |
+| `compute.python_version` | `3.12.10` | Filled |
+| `compute.os` | `Microsoft Windows 11 Pro` | Filled |
 
-## GitHub Repository Checklist
+## Repository Checklist
 
 | Check | Status |
 |---|---|
-| README completeness | Complete: setup, reproduction command, approach, layout, tests |
-| Architecture docs | Complete: `docs/architecture.md` |
-| Scoring docs | Complete: `docs/scoring_methodology.md` |
-| Analysis docs | Complete: `docs/analysis_report.md` |
-| PPT/PDF content | Complete: `FINAL_PDF_SUBMISSION_CONTENT.md` and `docs/ppt_content.md` |
-| Requirements file | Complete: `requirements.txt` |
-| Reproducibility instructions | Complete: `README.md` and `run.py` |
-| Submission metadata template | Present but placeholders remain |
-| Tests | Complete: `tests/test_core.py` |
-| Generated CSV | Complete: `submission.csv` and `outputs/submission.csv` |
-| Debug audit artifact | Reproducible locally with `--debug-json`; not committed |
+| README | Includes overview, setup, reproduction, validation, runtime, and scoring summary |
+| Architecture docs | `docs/architecture.md` |
+| Scoring docs | `docs/scoring_methodology.md` |
+| JD/signal analysis | `docs/analysis_report.md` |
+| Slide/PDF content | `FINAL_PDF_SUBMISSION_CONTENT.md` and `docs/ppt_content.md` |
+| Requirements file | `requirements.txt` |
+| Tests | `tests/test_core.py` |
+| Final CSV | `submission.csv` |
+| Raw candidate dataset | Not committed |
+| Output/debug artifacts | Not committed; can be regenerated locally |
 
-## Deliverable Verification
+## Reproduction Commands
 
-| Deliverable | Expected File / Link | Status |
-|---|---|---|
-| `submission.csv` | `submission.csv` | Exists |
-| GitHub repository | Final remote URL in `submission_metadata.yaml` | Missing human action |
-| PDF/PPT | Export from `FINAL_PDF_SUBMISSION_CONTENT.md` into official template | Content ready; export missing |
-| Metadata | `submission_metadata.yaml` | Exists; placeholders remain |
-| Sandbox link | Final hosted demo URL | Missing human action |
-
-## Step 1: Create GitHub Repository
-
-1. Create a GitHub repository for `redrob_ranker`.
-2. Use a clear name such as `redrob-candidate-ranker`.
-3. Keep it public if possible, or ensure organizer access can be granted.
-
-## Step 2: Upload Code
-
-1. Commit the full `redrob_ranker/` directory.
-2. Include source, docs, tests, `submission.csv`, and metadata.
-3. Do not commit the full `candidates.jsonl` file.
-4. Confirm `requirements.txt` and `README.md` are in the repository root.
-
-## Step 3: Verify Files
-
-Run:
+Run from the repository root:
 
 ```bash
 python run.py --candidates ./data/candidates.jsonl --out ./submission.csv
@@ -67,48 +45,23 @@ python -m unittest discover -s tests
 python validate_submission.py submission.csv
 ```
 
-Expected:
+Expected local results:
 
-- The ranking command completes under 5 minutes.
-- Tests pass.
-- Validator reports `Submission is valid.`
+- ranking completes under the 5-minute CPU limit.
+- unit tests pass.
+- official validator prints `Submission is valid.`
 
-## Step 4: Export PDF
+## Portal Steps
 
-1. Open the official Redrob idea submission template.
-2. Fill it using `FINAL_PDF_SUBMISSION_CONTENT.md`.
-3. Export the completed deck/template as PDF.
-4. Check that all slide titles, bullets, diagrams, and presenter notes are represented clearly.
+1. Confirm the final `submission.csv` is the root-level file from this repository.
+2. Export the official PDF/PPT using `FINAL_PDF_SUBMISSION_CONTENT.md`.
+3. Enter the team and contact fields from `submission_metadata.yaml`.
+4. Add the GitHub URL: `https://github.com/Vcode2407/redrob-intelligent-candidate-ranking`.
+5. Add a sandbox/demo URL only if one has been created.
+6. Upload the CSV and PDF/PPT on the Redrob portal.
+7. Submit after checking that the portal preview shows the right files and links.
 
-## Step 5: Fill Metadata
+## Remaining Manual Item
 
-1. Replace placeholders in `submission_metadata.yaml`.
-2. Add final GitHub repository URL.
-3. Add final sandbox/demo link.
-4. Confirm compute environment details match the machine used for the final run.
-5. Keep AI usage declaration honest and consistent with the code.
-
-## Step 6: Submit On Portal
-
-1. Upload `submission.csv`.
-2. Enter portal metadata exactly as in `submission_metadata.yaml`.
-3. Upload or link the final PDF/PPT assets if required by the portal.
-4. Provide GitHub repository URL.
-5. Provide sandbox/demo URL.
-6. Submit only after all missing human-input items below are resolved.
-
-## Missing Items
-
-- Final team name.
-- Primary contact name, email, and phone.
-- Final team member names and emails.
-- Final GitHub repository URL.
-- Final sandbox/demo link.
-- Final exact compute environment values if different from the current placeholders.
-- Exported PDF/PPT file from the provided slide content.
-
-## Technical Status
-
-TECHNICAL SUBMISSION COMPLETE
-
-The code, CSV, docs, tests, validator-compatible output, audit report, and slide content are complete. Remaining work is manual submission packaging: identity metadata, GitHub remote, sandbox link, and PDF/PPT export.
+- Export the final PDF/PPT in the official template.
+- Replace `sandbox_link` only if a real demo URL is available.

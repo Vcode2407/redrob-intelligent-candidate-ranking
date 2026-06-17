@@ -2,7 +2,7 @@
 
 ## Overview
 
-The system is a streaming, deterministic ranker. It reads `candidates.jsonl` one row at a time, extracts evidence-weighted features, scores each candidate, keeps a bounded top-K heap, generates fact-grounded reasoning for the final top 100, and writes a validator-compliant CSV.
+The system is a streaming, deterministic ranking pipeline. It reads `candidates.jsonl` one row at a time, extracts field-aware features, scores each candidate, keeps a bounded top-K heap, generates explanations for the final top 100, and writes the CSV required by the challenge validator.
 
 ```mermaid
 flowchart LR
@@ -36,7 +36,7 @@ flowchart LR
 - No external model downloads.
 - Standard library only.
 - Streaming data loader and bounded heap keep memory low.
-- Full local run on 100K candidates completed in about 42 seconds after cache warmup.
+- Final local run on 100K candidates completed in 73.32 seconds on CPU.
 
 ## Explainability
 
@@ -48,5 +48,4 @@ For every submitted candidate, the ranker retains:
 - Redrob behavioral facts.
 - concerns and risk flags.
 
-The `reasoning` column is generated only from these retained facts, reducing hallucination risk.
-
+The `reasoning` column is generated only from these retained facts, so explanations stay tied to profile fields used during scoring.

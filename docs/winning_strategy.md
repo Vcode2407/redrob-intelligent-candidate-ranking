@@ -1,48 +1,45 @@
-# Winning Strategy
+# Evaluation Notes And Risk Checks
 
-## Likely Hidden Evaluation Criteria
+This file records the assumptions used when checking the final ranking. It is not part of the runtime pipeline.
 
-- Top-10 exactness: NDCG@10 has 50% weight, so the first page matters most.
-- Production retrieval/ranking relevance, not broad AI vocabulary.
-- Behavioral availability for candidates who are otherwise close.
-- Honeypot rate in top 100.
-- Reasoning quality during manual review.
-- Reproducible CPU-only runtime.
-- Code clarity and ability to defend design choices.
+## Likely Review Criteria
 
-## How Top Teams Will Approach It
+- Top-10 and top-50 relevance, based on the official metric weights.
+- Evidence of production retrieval, ranking, search, or recommendation work.
+- Whether behavior signals make a candidate realistic to contact.
+- Whether obvious keyword-stuffed or inconsistent profiles appear in the submitted top 100.
+- Whether the reasoning column is specific to the candidate instead of repeating a template.
+- Whether the run can be reproduced on CPU without network calls.
 
-- Parse the JD as a hiring rubric, not a bag of words.
-- Separate profile fields by trust level: career history > title > behavior > skills > summary buzzwords.
-- Use explicit negative controls for keyword stuffing and synthetic inconsistencies.
-- Inspect top-ranked candidates manually through debug artifacts.
-- Optimize top-10 precision before broad recall.
+## Ranking Review Approach
 
-## Common Mistakes
+- Treat profile fields by trust level: career history first, then current title, behavior signals, skills, and summary text.
+- Check that top-ranked candidates have at least one work-history proof point for retrieval, search, ranking, matching, or evaluation.
+- Use skills as supporting evidence, not as the main ranking reason.
+- Review high-risk candidates manually when they have long notice periods, weak response rates, unusual locations, or repeated role descriptions.
+- Prefer moving a risky candidate down rather than removing them entirely when the technical evidence is still strong.
 
-- Counting AI skills and ranking by total.
-- Using embeddings over full text without field weighting, causing skill stuffers to dominate.
-- Ignoring Redrob behavioral signals.
-- Not checking honeypots.
-- Producing generic or hallucinated reasoning.
-- Depending on API calls or heavy local models that fail Stage 3 reproduction.
-- Submitting a valid CSV but no defensible methodology.
+## Common Failure Modes
 
-## Honeypot Avoidance
+- Ranking by the count of AI skills.
+- Embedding full profile text without separating career history from skill lists.
+- Ignoring Redrob behavior fields such as response rate, activity, notice period, and relocation.
+- Letting a research-heavy profile outrank a production retrieval/search engineer.
+- Producing reasoning that mentions facts not present in the candidate record.
+- Depending on external APIs or local models that are not available during challenge reproduction.
 
-- Detect expert skills with zero months of use.
-- Detect employment before known company founding year.
-- Penalize nontechnical title plus unrelated AI-system descriptions.
-- Penalize inflated AI skill lists without career evidence.
-- Penalize inverted or inconsistent profile fields lightly unless paired with stronger risk.
-- Keep risk flags in debug output and inspect top 100 before submission.
+## Honeypot And Template Checks
 
-## Improving NDCG@10 And NDCG@50
+- Expert skills with zero months of use.
+- Employment dates that conflict with known company timelines.
+- Nontechnical current title paired with a long list of unrelated AI-system terms.
+- Many AI skills with weak duration, endorsements, or role-history support.
+- Consulting-only profiles without product deployment evidence.
+- Repeated role descriptions across jobs that look copied rather than specific.
 
-- Put exact production ranking/search/retrieval owners at the top.
-- Prefer candidates with evidence of evaluation frameworks and online/offline correlation.
-- Use behavior only after technical evidence is established.
-- Move low-response or stale candidates below similarly technical active candidates.
-- Keep long-notice/outside-India candidates if technically exceptional, but not ahead of equivalent reachable candidates.
-- Avoid filler profiles in the top 50; every top-50 candidate should have at least one career-history proof point.
+## Top-Rank Quality Checks
 
+- The top 10 should mostly contain candidates with production retrieval, search, ranking, recommendation, or candidate-matching evidence.
+- The top 50 should avoid profiles that only have adjacent AI or analytics experience.
+- Long-notice or outside-India candidates should not outrank similar candidates who are easier to hire.
+- Behavior signals should reorder close technical matches, not replace technical relevance.

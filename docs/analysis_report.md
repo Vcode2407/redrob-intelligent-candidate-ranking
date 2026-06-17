@@ -12,7 +12,7 @@
 
 ## Mandatory JD Requirements
 
-The role is Senior AI Engineer on Redrob's founding AI engineering team. The true target is not "AI keyword familiarity"; it is a senior builder who can own candidate-JD matching infrastructure in production.
+The role is Senior AI Engineer on Redrob's AI engineering team. The JD points to a candidate who has built retrieval, matching, ranking, or recommendation systems in production, not someone who only lists AI tools.
 
 Must-have evidence:
 
@@ -20,7 +20,7 @@ Must-have evidence:
 - Vector database or hybrid search infrastructure such as FAISS, Pinecone, Weaviate, Qdrant, Milvus, OpenSearch, Elasticsearch, or equivalent.
 - Strong Python and production code quality.
 - Ranking evaluation literacy: NDCG, MRR, MAP, offline benchmarks, online A/B tests, recruiter feedback loops.
-- Product-engineering judgment: can ship a useful ranker quickly, then measure and improve it.
+- Product-engineering judgment: can ship a retrieval or ranking feature, measure it, and iterate from recruiter/user feedback.
 - Recent hands-on coding, not only architecture or management.
 - Roughly 5-9 years, with the ideal band around 6-8 years. The JD allows exceptions when other signals are strong.
 
@@ -35,7 +35,7 @@ Preferred but not mandatory:
 ## Strong Positive Signals
 
 - Career history explicitly says the candidate owned ranking, retrieval, recommendation, semantic search, or candidate matching systems.
-- Work includes production scale: query volume, user volume, latency, index refresh, rollback, monitoring, model drift, or A/B testing.
+- Work includes production detail: query volume, user volume, latency, index refresh, rollback, monitoring, model drift, or A/B testing.
 - Evaluation framework ownership, especially NDCG/MRR/offline-online correlation.
 - Recruiter-facing or candidate-JD matching product context.
 - Product-company or AI-product-company history rather than services-only delivery.
@@ -81,11 +81,10 @@ These are used as a modifier, not a replacement for technical fit. A strong tech
 - Keyword stuffer: many AI skills, low duration/endorsement trust, and no relevant production history.
 - Services-only career without product-company evidence.
 - Pure research without deployment.
-- Low-quality profile with stale activity and weak engagement.
+- Stale profile with weak engagement signals.
 
 ## Candidate Pool Observations
 
-The full pool has 100,000 candidates. Only about 573 have AI/ML-style current titles, while most are business, HR, sales, content, operations, or non-ML engineering backgrounds. The sample submission is intentionally low-quality: it ranks many HR/marketing/content profiles by AI skill count. This confirms the dataset's main trap: skill keywords are cheap and cannot drive ranking alone.
+The pool has 100,000 candidates. A small slice has AI/ML-style current titles, while many profiles are business, HR, sales, content, operations, or non-ML engineering backgrounds. The sample submission ranks several non-engineering profiles highly when they contain AI skill terms. That supports a field-aware approach where work history is more trusted than skill keywords.
 
-High-quality histories are rare and specific. Examples include recruiter-facing ranking pipelines, semantic search over large corpora, candidate corpus embedding search, production recommendation systems, and ranking evaluation pipelines. The implemented ranker is built to surface those profiles.
-
+The strongest histories are specific: recruiter-facing ranking pipelines, semantic search over large corpora, candidate-corpus embedding search, production recommendation systems, or ranking evaluation pipelines. The implemented ranker gives those signals more weight than broad AI wording in summaries.

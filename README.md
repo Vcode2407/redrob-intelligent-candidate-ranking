@@ -1,23 +1,23 @@
 # Redrob Intelligent Candidate Ranking
 
-Submission package for the Redrob AI **Intelligent Candidate Discovery & Ranking Challenge**.
+Submission package for the Redrob AI **Intelligent Candidate Discovery and Ranking Challenge**.
 
-This repository contains a deterministic, CPU-only ranker for 100,000 candidate profiles. It produces a validator-ready `submission.csv` with the top 100 candidates for Redrob's Senior AI Engineer hiring scenario, along with fact-grounded reasoning and debug artifacts.
+This repository contains a deterministic, CPU-only Python pipeline for ranking 100,000 candidate profiles. It reads the challenge JSONL file, scores candidates against the Senior AI Engineer job description, keeps the top 100, and writes the final `submission.csv`.
 
 ## Challenge Summary
 
-The challenge asks participants to rank candidates while avoiding common traps:
+The challenge data includes profiles that can look relevant for the wrong reasons:
 
-- keyword-stuffed AI profiles with weak career evidence.
-- honeypot candidates and synthetic inconsistencies.
-- misleading profile-quality signals.
-- candidates who are strong technically but difficult to hire because of availability, location, or notice-period constraints.
+- long AI skill lists without matching work history.
+- synthetic or inconsistent profile fields.
+- high-level summaries that hide weak production experience.
+- technically relevant candidates who are hard to reach or hire because of activity, response rate, location, or notice period.
 
-The solution is designed to read profiles like a hiring manager: production evidence first, keywords second.
+The implementation gives more trust to career-history evidence than to free-text summaries or skill lists.
 
 ## Solution Overview
 
-The ranker prioritizes:
+The scoring code gives positive weight to:
 
 - production embeddings, retrieval, vector search, hybrid search, and ranking systems.
 - Python and ML systems implementation experience.
@@ -25,12 +25,12 @@ The ranker prioritizes:
 - coherent career progression and product/company ownership.
 - behavioral availability signals such as response rate, recent activity, notice period, and relocation feasibility.
 
-It explicitly downranks:
+It applies penalties for:
 
-- pure keyword matchers without role-history evidence.
+- skill lists without role-history evidence.
 - consulting-only or side-project-only profiles.
 - pure research profiles without production IR/ranking relevance.
-- stale, low-response, hard-to-hire candidates.
+- stale, low-response, or long-notice candidates.
 - repeated-template, synthetic, or internally inconsistent profiles.
 
 ## Architecture
@@ -45,9 +45,9 @@ redrob_ranker/
     features.py         # Feature extraction and risk detection
     jd_features.py      # Frozen JD requirement profile
     ranking.py          # Bounded top-K ranking engine
-    reasoning.py        # Fact-grounded reasoning generator
+    reasoning.py        # Profile-based reasoning generator
     scoring.py          # Scoring facade
-    submission.py       # CSV and debug writers
+    submission.py       # CSV writer and optional debug writer
     validate.py         # Local validator mirror
   tests/
   run.py
@@ -59,7 +59,7 @@ Core flow:
 
 ```text
 candidates.jsonl -> data loader -> feature extractor -> scoring engine
--> top-K ranking -> reasoning generator -> submission.csv + debug JSON
+-> top-K ranking -> reasoning generator -> submission.csv
 ```
 
 ## Setup
@@ -102,7 +102,7 @@ Expected local output:
 
 - `submission.csv`
 - `outputs/submission.csv`
-- `outputs/ranking_debug_top100.json`
+- optional `outputs/ranking_debug_top100.json` when `--debug-json` is supplied
 
 ## Validation
 
@@ -139,18 +139,20 @@ The final `submission.csv` contains:
 - Streaming JSONL loading for the 100,000-candidate pool.
 - Memory target under 16 GB.
 - Runtime target under 5 minutes.
-- Final audited full run completed in 73.32 seconds on the local CPU environment.
+- Final local full run completed in 73.32 seconds on the listed CPU environment.
 
 ## Scoring Summary
 
-Raw score:
+The implementation combines technical evidence, experience fit, career context, behavior, and risk. The raw score in `src/features.py` is:
 
 ```text
-3.25 * Technical + 1.50 * Experience + 1.30 * Career
-+ 1.10 * Behavior - 1.75 * Risk
+(2.85 * Technical + 1.35 * Experience + 1.15 * Career)
+* (0.72 + 0.28 * Behavior)
++ 1.45 * Behavior
+- 2.60 * Risk
 ```
 
-Technical evidence is mostly career-history based; skill-list terms act as corroboration. Behavioral signals adjust for recruiter reachability and hiring feasibility. Risk penalties are designed to keep honeypots, repeated templates, long-notice profiles, and keyword stuffers out of top ranks.
+Technical evidence is mostly career-history based; skill-list terms act as supporting evidence. Behavioral signals adjust close cases for recruiter reachability and hiring feasibility. Risk penalties cover keyword stuffing, repeated descriptions, long notice periods, location/relocation issues, and inconsistent profiles.
 
 See [docs/scoring_methodology.md](docs/scoring_methodology.md) for the full rubric.
 
