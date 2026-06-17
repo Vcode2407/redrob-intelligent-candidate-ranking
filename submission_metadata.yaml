@@ -11,7 +11,7 @@ team_members:
     role: "AI Engineer"
 
 github_repo: "https://github.com/Vcode2407/redrob-intelligent-candidate-ranking"
-sandbox_link: "https://huggingface.co/spaces/YOUR_USERNAME/redrob-ranker"
+sandbox_link: ""
 reproduce_command: "python run.py --candidates ./data/candidates.jsonl --out ./submission.csv"
 
 compute:

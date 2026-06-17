@@ -13,7 +13,7 @@ This guide covers the manual portal steps after the GitHub repository and `submi
 | `team_members[0].name` | `Vinay Kumar` | Filled |
 | `team_members[0].email` | `vkslog69@gmail.com` | Filled |
 | `github_repo` | `https://github.com/Vcode2407/redrob-intelligent-candidate-ranking` | Filled |
-| `sandbox_link` | Placeholder Hugging Face URL | Leave unchanged unless a demo is created |
+| `sandbox_link` | Blank | Fill only if the portal requires a live demo link |
 | `compute.platform` | Local Intel i7 CPU | Filled |
 | `compute.cpu_cores` | `8` logical cores | Filled |
 | `compute.ram_gb` | `15` | Filled |
@@ -54,7 +54,7 @@ Expected local results:
 ## Portal Steps
 
 1. Confirm the final `submission.csv` is the root-level file from this repository.
-2. Export the official PDF/PPT using `FINAL_PDF_SUBMISSION_CONTENT.md`.
+2. Use the generated `Vkodes_Redrob_Submission.pdf` and `Vkodes_Redrob_Submission.pptx`, or re-export from `FINAL_PDF_SUBMISSION_CONTENT.md` if the portal requires another format.
 3. Enter the team and contact fields from `submission_metadata.yaml`.
 4. Add the GitHub URL: `https://github.com/Vcode2407/redrob-intelligent-candidate-ranking`.
 5. Add a sandbox/demo URL only if one has been created.
@@ -63,5 +63,4 @@ Expected local results:
 
 ## Remaining Manual Item
 
-- Export the final PDF/PPT in the official template.
-- Replace `sandbox_link` only if a real demo URL is available.
+- Replace `sandbox_link` only if the Redrob portal requires a live demo URL.

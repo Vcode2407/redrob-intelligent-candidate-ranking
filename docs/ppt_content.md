@@ -6,7 +6,7 @@ Title: Redrob Intelligent Candidate Discovery Ranker
 
 Bullets:
 
-- Team: `<your team name>`
+- Team: Vkodes
 - Problem Statement: Rank top 100 candidates for Redrob Senior AI Engineer role
 - Objective: Maximize top-rank relevance while avoiding keyword-stuffers and honeypots
 
@@ -146,7 +146,7 @@ Title: Submission Quality Checks
 Bullets:
 
 - Official validator: pass.
-- Full 100K local run: about 42 seconds after cache warmup.
+- Full 100K local run: 73.32 seconds on local CPU.
 - Top 100 titles concentrated in search, recommendation, ML, NLP, and senior applied roles.
 - Top candidates show production retrieval/ranking evidence and active Redrob signals.
 - Honeypot flags absent from final top 100.
@@ -190,7 +190,7 @@ Bullets:
 - `run.py`: one-command reproduction.
 - `src/`: modular production-quality ranker.
 - `docs/`: analysis, scoring methodology, architecture, PPT content, winning strategy.
-- `outputs/ranking_debug_top100.json`: score and reasoning audit artifact.
+- Optional debug JSON can be regenerated locally with `--debug-json`; it is not committed.
 - `tests/`: unit tests for core behavior.
 
 Diagram suggestion:
@@ -200,4 +200,3 @@ Diagram suggestion:
 Speaker notes:
 
 The repo is ready for GitHub submission. The generated CSV is reproducible from the challenge candidates file and passes validation.
-
